@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import chromadb
 from sentence_transformers import SentenceTransformer
 from google import genai
+import arabic_reshaper
+from bidi.algorithm import get_display
 
 # 1. تهيئة البيئة والمفاتيح الأمنية
 load_dotenv()
@@ -74,4 +76,6 @@ if __name__ == "__main__":
     print("\n" + "="*50)
     print(" AI TASK MANAGER RESPONSE:")
     print("="*50)
-    print(response)
+    reshaped_text = arabic_reshaper.reshape(response)
+    bidi_text = get_display(reshaped_text)
+    print(bidi_text)
